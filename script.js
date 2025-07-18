@@ -1,47 +1,36 @@
-// Sample pieces array matching your 7 images
+// Example pieces array for demo purposes
 const pieces = [
-  { title: "Image 1", url: "https://via.placeholder.com/800x600?text=Image+1" },
-  { title: "Image 2", url: "https://via.placeholder.com/800x600?text=Image+2" },
-  { title: "Image 3", url: "https://via.placeholder.com/800x600?text=Image+3" },
-  { title: "Image 4", url: "https://via.placeholder.com/800x600?text=Image+4" },
-  { title: "Image 5", url: "https://via.placeholder.com/800x600?text=Image+5" },
-  { title: "Image 6", url: "https://via.placeholder.com/800x600?text=Image+6" },
-  { title: "Image 7", url: "https://via.placeholder.com/800x600?text=Image+7" }
+  { title: '(￣▽￣)ノ', url: '' },
+  { title: '(◕‿◕)', url: '' },
+  { title: '(｡♥‿♥｡)', url: '' },
+  { title: '(✿◠‿◠)', url: '' },
+  { title: '(≧ω≦)', url: '' },
+  { title: '(ღ˘⌣˘ღ)', url: '' },
+  { title: '(≧◡≦)', url: '' },
 ];
 
-function handleScroll() {
-  if (window.innerWidth > 800) {
-    const root = document.querySelector(':root');
-    root.style.setProperty('--scroll', Math.floor(window.scrollY) + 'px');
-    root.style.setProperty('--visible', ((Math.floor(window.scrollY - 17000) / -100).toFixed(1)));
+const link = document.getElementById('link');
 
-    let active = null;
-    const link = document.querySelector('#link');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  document.documentElement.style.setProperty('--scroll', scrollY + 'px');
+  document.documentElement.style.setProperty('--visible', ((scrollY - 17000) / -100).toFixed(1));
 
-    if (window.scrollY > 1500) {
-      pieces.forEach((d, i) => {
-        const z = 1200 + (i * 1000);
-        if (z - window.scrollY > -1680 && !active) {
-          active = d;
-          link.innerHTML = d.title + '&nbsp;&#8674;';
-          link.setAttribute('href', d.url);
-          link.style.display = 'block';
-        }
-      });
-    }
-
-    if (!active) {
-      link.style.display = 'none';
-      link.innerHTML = null;
+  // Show/hide and update the link based on scroll position
+  let active = null;
+  if (scrollY > 1500) {
+    for (let i = 0; i < pieces.length; i++) {
+      const z = 1200 + (i * 1000);
+      if (z - scrollY > -1680 && !active) {
+        active = pieces[i];
+        link.textContent = active.title + '';
+        link.style.display = 'block';
+      }
     }
   }
-}
-
-window.onload = () => {
-  const root = document.querySelector(':root');
-  root.style.setProperty('--vh', Math.min(640, Math.floor(window.innerHeight * 0.85)) + 'px');
-
-  handleScroll();
-};
-
-window.onscroll = () => handleScroll();
+  if (!active) {
+    link.style.display = 'none';
+    link.textContent = '';
+    link.href = '#';
+  }
+});
