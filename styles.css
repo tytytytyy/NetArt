@@ -31,11 +31,12 @@
     perspective: 600px;
     overflow: visible;
   }
+  
 article {
   position: absolute;
   width: 100vw;
   height: calc(100vh - 6rem);
-  border: 3px solid var(--accent);
+  border: 5px solid var(--accent);
   border-bottom: none;
   top: 0;
   left: 0;
@@ -51,9 +52,8 @@ article img {
   width: 40vw;
   object-fit: cover;
   display: block;
-    border: 4px solid var(--accent); /* 👈 the square border */
-  box-sizing: border-box;       /* 👈 make sure border doesn't overflow */
-  /* margin: 0 auto;  <-- no longer needed with flex */
+  padding: 5vw; /* adjust as needed */
+
 
 }
 
